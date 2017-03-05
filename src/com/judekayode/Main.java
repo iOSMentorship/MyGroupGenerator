@@ -16,13 +16,16 @@ public class Main {
             String[] strings = trimmedString.split(",");
             ArrayList<String> entries = new ArrayList<String>(Arrays.asList(strings));
 
+            System.out.println();
             System.out.println("Please enter number of people per group");
             int noPerGroup = sc.nextInt();
+            System.out.println();
 
             if(noPerGroup > entries.size() || noPerGroup <=0) {
                 System.out.println("Invalid number Per group specified");
 
             } else {
+                System.out.println("The groups are :");
                 int index = 0;
                 for (PairModel model : main.Pairs(entries, noPerGroup)) {
                     System.out.println("Group " + (index + 1) + " - " + model.ToString());
