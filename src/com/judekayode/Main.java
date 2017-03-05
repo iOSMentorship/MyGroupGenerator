@@ -12,7 +12,8 @@ public class Main {
         System.out.println("Please enter the names you want to group together in comma seperated format");
 
         try {
-            String[] strings = sc.next().split(",");
+            String trimmedString = sc.nextLine().replaceAll("\\s","");
+            String[] strings = trimmedString.split(",");
             ArrayList<String> entries = new ArrayList<String>(Arrays.asList(strings));
 
             System.out.println("Please enter number of people per group");
