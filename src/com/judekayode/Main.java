@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main main = new Main();
+        GroupGenerator main = new GroupGenerator();
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Please enter the names you want to group together in comma seperated format");
@@ -27,7 +27,7 @@ public class Main {
             } else {
                 System.out.println("The groups are :");
                 int index = 0;
-                for (PairModel model : main.Pairs(entries, noPerGroup)) {
+                for (PairModel model : main.generateGroup(entries, noPerGroup)) {
                     System.out.println("Group " + (index + 1) + " - " + model.ToString());
                     index++;
                 }
@@ -37,54 +37,6 @@ public class Main {
         }
 
     }
-
-    private  List<PairModel> Pairs(ArrayList<String> namesToGroup, int noPerGroup) {
-        List<PairModel> pairedValues = new ArrayList<>();
-        int lowerBound = 0;
-        double initialLength = (double) namesToGroup.size();
-        int entriesLength = namesToGroup.size();
-
-        int ceil = (int) Math.ceil(initialLength / noPerGroup);
-        for (int i = 0; i < ceil; i++) {
-            if(entriesLength >=noPerGroup) {
-                Random rand = new Random();
-                StringBuilder paird = new StringBuilder();
-                for (int j = 0; j <noPerGroup; j++) {
-                    int randomValue = rand.nextInt((namesToGroup.size()-1)-lowerBound+1)+lowerBound;
-                    String val = namesToGroup.get(randomValue);
-                    namesToGroup.remove(randomValue);
-                    String app;
-                    if(j== 0){
-                        app = val;
-                    } else {
-                        app = "," + val;
-                    }
-                    paird.append(app);
-                }
-
-                pairedValues.add(new PairModel(paird.toString()));
-                entriesLength -= noPerGroup;
-            } else if(entriesLength > 0){
-                StringBuilder paird = new StringBuilder();
-                for (int k = 0; k < entriesLength; k++) {
-                    String val = namesToGroup.get(k);
-                    namesToGroup.remove(k);
-                    String app;
-                    if(k== 0){
-                        app = val;
-                    } else {
-                        app = "," + val;
-                    }
-
-                    paird.append(app);
-                }
-                pairedValues.add(new PairModel(paird.toString()));
-            }
-        }
-        return pairedValues;
-    }
-
-
 
 
 }
